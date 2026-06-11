@@ -2,10 +2,22 @@ import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { useEnergyMix } from '@/hooks/useEnergyMix'
 import type { DailyEnergyMix } from '@/api/types'
 
+const COLORS: Record<string, string> = {
+  biomass: '#16a34a',
+  nuclear: '#7c3aed',
+  hydro: '#2563eb',
+  wind: '#0891b2',
+  solar: '#ca8a04',
+  gas: '#ea580c',
+  coal: '#78350f',
+  imports: '#64748b',
+  other: '#94a3b8',
+}
+
 const DAY_LABELS = ['Today', 'Tomorrow', 'Day After Tomorrow']
 
 function DayCard({ day, index }: { day: DailyEnergyMix; index: number }) {
-  const chartData = day.averageMix.map((fm) => ({ name: fm.fuel, value: fm.perc }))
+  const chartData = day.averageMix.map((fm) => ({ name: fm.fuel, value: fm.perc, fill: COLORS[fm.fuel] ?? '#ccc' }))
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4">
@@ -27,7 +39,7 @@ function DayCard({ day, index }: { day: DailyEnergyMix; index: number }) {
             dataKey="value"
             paddingAngle={2}
           />
-          <Tooltip />
+          <Tooltip formatter={(value) => `${(value as number).toFixed(1)}%`} />
           <Legend iconSize={10} />
         </PieChart>
       </ResponsiveContainer>

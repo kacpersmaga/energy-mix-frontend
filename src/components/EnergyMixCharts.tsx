@@ -17,7 +17,10 @@ const COLORS: Record<string, string> = {
 const DAY_LABELS = ['Today', 'Tomorrow', 'Day After Tomorrow']
 
 function DayCard({ day, index }: { day: DailyEnergyMix; index: number }) {
-  const chartData = day.averageMix.map((fm) => ({ name: fm.fuel, value: fm.perc, fill: COLORS[fm.fuel] ?? '#ccc' }))
+  const chartData = day.averageMix
+    .filter((fm) => fm.perc > 0)
+    .sort((a, b) => b.perc - a.perc)
+    .map((fm) => ({ name: fm.fuel, value: fm.perc, fill: COLORS[fm.fuel] ?? '#ccc' }))
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4">

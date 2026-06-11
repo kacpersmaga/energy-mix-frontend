@@ -51,13 +51,14 @@ function DayCard({ day, index }: { day: DailyEnergyMix; index: number }) {
 }
 
 export function EnergyMixCharts() {
-  const { data } = useEnergyMix()
+  const { data, loading, error } = useEnergyMix()
 
-  if (!data) return null
+  if (loading) return <p className="text-sm text-gray-500">Wczytywanie danych...</p>
+  if (error) return <p className="text-sm text-red-600">Błąd: {error}</p>
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {data.map((day, i) => <DayCard key={day.date} day={day} index={i} />)}
+      {data!.map((day, i) => <DayCard key={day.date} day={day} index={i} />)}
     </div>
   )
 }

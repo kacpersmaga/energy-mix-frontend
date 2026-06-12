@@ -3,7 +3,7 @@ import { useOptimalCharging } from '@/hooks/useOptimalCharging'
 
 export function ChargingWindow() {
   const [hours, setHours] = useState(2)
-  const { loading, findOptimalWindow } = useOptimalCharging()
+  const { result, loading, error, findOptimalWindow } = useOptimalCharging()
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -38,6 +38,32 @@ export function ChargingWindow() {
           {loading ? 'Searching...' : 'Find Best Window'}
         </button>
       </form>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {result && (
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 space-y-3">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Best window found</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <p className="text-xs text-gray-400">Start</p>
+              <p className="text-sm font-semibold text-gray-800">{result.start}</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-400">End</p>
+              <p className="text-sm font-semibold text-gray-800">{result.end}</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-400">Avg. clean energy</p>
+              <p className="text-2xl font-bold text-emerald-600">{result.averageCleanEnergy.toFixed(1)}%</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -3,6 +3,14 @@ import { EnergyMixCharts } from '@/components/EnergyMixCharts'
 import * as useEnergyMixModule from '@/hooks/useEnergyMix'
 import type { DailyEnergyMix } from '@/api/types'
 
+vi.mock('recharts', () => ({
+  PieChart: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  Pie: () => <div data-testid="pie" />,
+  Tooltip: () => null,
+  Legend: () => null,
+  ResponsiveContainer: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}))
+
 const mockDay: DailyEnergyMix = {
   date: '2026-06-13',
   averageMix: [

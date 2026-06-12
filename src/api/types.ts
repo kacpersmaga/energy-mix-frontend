@@ -8,3 +8,9 @@ export interface DailyEnergyMix {
   averageMix: FuelMix[]
   cleanEnergyPercentage: number
 }
+
+export interface OptimalChargingWindow {
+  start: string
+  end: string
+  averageCleanEnergy: number
+}

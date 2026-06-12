@@ -1,11 +1,21 @@
-import { useState } from 'react'
+import { useState, type SubmitEvent } from 'react'
 import { useOptimalCharging } from '@/hooks/useOptimalCharging'
+
+function formatDateTime(iso: string) {
+  return new Date(iso).toLocaleString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
 
 export function ChargingWindow() {
   const [hours, setHours] = useState(2)
   const { result, loading, error, findOptimalWindow } = useOptimalCharging()
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
     findOptimalWindow(hours)
   }
@@ -51,11 +61,11 @@ export function ChargingWindow() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <p className="text-xs text-gray-400">Start</p>
-              <p className="text-sm font-semibold text-gray-800">{result.start}</p>
+              <p className="text-sm font-semibold text-gray-800">{formatDateTime(result.start)}</p>
             </div>
             <div>
               <p className="text-xs text-gray-400">End</p>
-              <p className="text-sm font-semibold text-gray-800">{result.end}</p>
+              <p className="text-sm font-semibold text-gray-800">{formatDateTime(result.end)}</p>
             </div>
             <div>
               <p className="text-xs text-gray-400">Avg. clean energy</p>

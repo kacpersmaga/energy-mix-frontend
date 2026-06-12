@@ -1,4 +1,5 @@
 import { EnergyMixCharts } from './components/EnergyMixCharts'
+import { ChargingWindow } from './components/ChargingWindow'
 
 export default function App() {
   return (
@@ -16,6 +17,13 @@ export default function App() {
             3-Day Energy Mix Forecast
           </h2>
           <EnergyMixCharts />
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+            Smart Charging Planner
+          </h2>
+          <ChargingWindow />
         </section>
       </main>
     </div>

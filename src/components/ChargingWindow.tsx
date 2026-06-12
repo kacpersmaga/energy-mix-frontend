@@ -35,10 +35,13 @@ export function ChargingWindow() {
           <input
             id="hours-input"
             type="number"
+            min={1}
+            max={6}
             value={hours}
             onChange={(e) => setHours(Number(e.target.value))}
             className="block w-24 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
+          <p className="text-xs text-gray-400">1 – 6 hours</p>
         </div>
         <button
           type="submit"

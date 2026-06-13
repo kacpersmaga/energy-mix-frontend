@@ -4,6 +4,11 @@ React 19 + TypeScript + Tailwind. Three pie charts for the 3-day generation mix,
 
 `npm run dev` · `npm test` · expects the backend at `http://localhost:5197` (override with `VITE_API_URL`).
 
+## Links
+
+- **Live application:** https://energy-mix-frontend-0ru0.onrender.com/
+- **Backend repository:** https://github.com/kacpersmaga/uk-energy-api
+
 ## Design decisions
 
 - **Today's chart covers the full day (00:00–23:30 UTC)**, not just from now on, so the three days are comparable. Past intervals are actuals, future ones forecast.
